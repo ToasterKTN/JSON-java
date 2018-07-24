@@ -476,6 +476,10 @@ public class JSONObject {
      */
     public JSONObject accumulate(String key, Object value) throws JSONException {
         testValidity(value);
+        if (key.toLowerCase().startsWith("__jsonarray__")) {
+        		key = key.substring(13);
+        		this.put(key,new JSONArray());
+        }
         Object object = this.opt(key);
         if (object == null) {
             this.put(key,
